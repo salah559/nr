@@ -1,0 +1,28 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // دالة للتحقق من المسؤول
+    function isAdmin() {
+      return request.auth != null && 
+             firestore.get(/databases/(default)/documents/admins/$(request.auth.uid)).data != null;
+    }
+    
+    // مجلد صور القائمة
+    match /menu_images/{imageId} {
+      // الجميع يمكنهم القراءة
+      allow read: if true;
+      
+      // فقط المسؤولين يمكنهم الرفع/الحذف
+      allow write: if isAdmin() &&
+                    request.resource.size < 5 * 1024 * 1024 && // حد أقصى 5MB
+                    request.resource.contentType.matches('image/.*'); // صور فقط
+    }
+    
+    // منع الوصول لأي ملفات أخرى
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

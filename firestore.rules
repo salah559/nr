@@ -1,0 +1,78 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // دالة مساعدة للتحقق من المسؤول
+    function isAdmin() {
+      return request.auth != null && 
+             exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    
+    // دالة للتحقق من تسجيل الدخول
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // ===== المسؤولين (Admins) =====
+    // فقط المسؤولين يمكنهم القراءة/الكتابة
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      allow write: if false; // يجب إنشاء المسؤولين من Firebase Console
+    }
+    
+    // ===== القائمة (Menu Items) =====
+    // الجميع يمكنهم القراءة، فقط المسؤولين يمكنهم الكتابة
+    match /menu_items/{itemId} {
+      allow read: if true; // الجميع يمكنهم رؤية القائمة
+      allow create, update, delete: if isAdmin();
+      
+      // التحقق من صحة البيانات
+      allow create: if isAdmin() && 
+                     request.resource.data.keys().hasAll(['name', 'price', 'category']) &&
+                     request.resource.data.price is number &&
+                     request.resource.data.price > 0;
+    }
+    
+    // ===== الحجوزات (Reservations) =====
+    // الزبائن يمكنهم الإنشاء فقط، المسؤولين يمكنهم القراءة/التعديل/الحذف
+    match /reservations/{reservationId} {
+      allow create: if true; // أي شخص يمكنه إنشاء حجز
+      allow read, update, delete: if isAdmin();
+      
+      // التحقق من صحة بيانات الحجز
+      allow create: if request.resource.data.keys().hasAll(['name', 'phone', 'date', 'time', 'guests']) &&
+                     request.resource.data.name is string &&
+                     request.resource.data.name.size() > 0 &&
+                     request.resource.data.guests is number &&
+                     request.resource.data.guests > 0 &&
+                     request.resource.data.guests < 50;
+    }
+    
+    // ===== الطلبات (Orders) =====
+    // الزبائن يمكنهم الإنشاء فقط، المسؤولين يمكنهم القراءة/التعديل
+    match /orders/{orderId} {
+      allow create: if true; // أي شخص يمكنه إنشاء طلب
+      allow read, update, delete: if isAdmin();
+      
+      // التحقق من صحة بيانات الطلب
+      allow create: if request.resource.data.keys().hasAll(['customer', 'items', 'total']) &&
+                     request.resource.data.total is number &&
+                     request.resource.data.total >= 0;
+    }
+    
+    // ===== سجل النشاطات (Activity Logs) =====
+    // فقط المسؤولين يمكنهم القراءة
+    // الكتابة من خلال الكود فقط
+    match /activity_logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAuthenticated(); // يمكن للمصادقين تسجيل النشاطات
+      allow update, delete: if false; // لا يمكن تعديل أو حذف السجلات
+    }
+    
+    // منع الوصول لأي مجموعات أخرى
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Nova Restaurant</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="topbar">
+    <div class="logo-container" id="logo-click">
+      <img src="images/logo.png" alt="Nova Logo" class="logo">
+      <div class="brand">
+        <h1 class="brand-title" data-i18n="brand">Nova Restaurant</h1>
+        <p class="brand-sub" data-i18n="tagline">Fresh taste. Cozy place.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <div class="lang-selector">
+        <button class="lang-current">
+          🇬🇧 <span class="lang-name">English</span> <span class="lang-arrow">▼</span>
+        </button>
+        <div class="lang-dropdown"></div>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+      <nav class="main-nav">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="menu.html" data-i18n="nav_menu">Menu</a>
+        <a href="reservation.html" data-i18n="nav_res">Reservation</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <h2 data-i18n="hero_title">Welcome to Nova Restaurant</h2>
+      <p data-i18n="hero_sub">Savor the flavour — order online or book a table.</p>
+      <div class="hero-ctas">
+        <a href="menu.html" class="btn" data-i18n="cta_order">Order Now</a>
+        <a href="reservation.html" class="btn btn-outline" data-i18n="cta_book">Book a Table</a>
+      </div>
+    </div>
+    <img src="images/hero.jpg" alt="Hero image" class="hero-img">
+  </section>
+
+  <section class="specials">
+    <h3 data-i18n="specials_title">Chef's Specials</h3>
+    <div class="cards">
+      <article class="card">
+        <img src="images/dish1.jpg" alt="dish1" loading="lazy">
+        <h4 data-i18n="dish1_name">Grilled Chicken</h4>
+        <p data-i18n="dish1_desc">Herb-marinated with roasted vegetables.</p>
+        <p class="price">$12</p>
+      </article>
+      <article class="card">
+        <img src="images/dish2.jpg" alt="dish2" loading="lazy">
+        <h4 data-i18n="dish2_name">Beef Steak</h4>
+        <p data-i18n="dish2_desc">Juicy steak with chef sauce.</p>
+        <p class="price">$18</p>
+      </article>
+      <article class="card">
+        <img src="images/dish3.jpg" alt="dish3" loading="lazy">
+        <h4 data-i18n="dish3_name">Vegetable Pasta</h4>
+        <p data-i18n="dish3_desc">Seasonal veggies, light sauce.</p>
+        <p class="price">$10</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="offers">
+    <h3 data-i18n="offers_title">Current Offers</h3>
+    <div class="carousel">
+      <div class="slide">20% off pizzas - Wed</div>
+      <div class="slide">Free dessert on orders over $40</div>
+      <div class="slide">Student discount on weekdays</div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="about-inner">
+      <h3 data-i18n="about_title">About Us</h3>
+      <p data-i18n="about_text">Nova Restaurant brings fresh, home-made flavors to the neighborhood. Family-run, passionate chefs.</p>
+    </div>
+    <img src="images/restaurant_interior.jpg" alt="interior" loading="lazy">
+  </section>
+
+  <section class="reviews">
+    <h3 data-i18n="reviews_title">What customers say</h3>
+    <div class="review-list">
+      <blockquote>“Amazing food and cozy mood.” — Lina ★★★★★</blockquote>
+      <blockquote>“Quick delivery and great flavors.” — Omar ★★★★☆</blockquote>
+    </div>
+  </section>
+
+  <section class="location">
+    <h3 data-i18n="location_title">Our Location</h3>
+    <p data-i18n="location_text">Oran, Algeria</p>
+    <div class="map-placeholder">
+      <iframe src="https://maps.google.com/maps?q=35.690528,-0.649444&hl=en&z=14&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="contact-mini">
+    <span data-i18n="footer_phone">Phone:</span> <a href="tel:+213555123456">+213 555 123 456</a>
+    <span data-i18n="footer_email">Email:</span> <a href="mailto:info@nova-demo.com">info@nova-demo.com</a>
+  </div>
+  <p>&copy; 2025 Nova Restaurant</p>
+</footer>
+
+<div id="admin-login-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2 data-i18n="admin_login">Admin Login</h2>
+    <form id="admin-login-form">
+      <div class="form-group">
+        <label for="admin-username" data-i18n="username">Username</label>
+        <input type="text" id="admin-username" autocomplete="username" required>
+      </div>
+      <div class="form-group">
+        <label for="admin-password" data-i18n="password">Password</label>
+        <input type="password" id="admin-password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn" data-i18n="login">Login</button>
+      <div id="login-error" class="error-message"></div>
+    </form>
+  </div>
+</div>
+
+<script src="js/lang.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/script.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

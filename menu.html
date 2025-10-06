@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Menu - Nova Restaurant</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="topbar">
+    <div class="logo-container">
+      <img src="images/logo.png" alt="Nova Logo" class="logo">
+      <div class="brand">
+        <h1 class="brand-title" data-i18n="brand">Nova Restaurant</h1>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <div class="lang-selector">
+        <button class="lang-current">
+          🇬🇧 <span class="lang-name">English</span> <span class="lang-arrow">▼</span>
+        </button>
+        <div class="lang-dropdown"></div>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+      <nav class="main-nav">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="menu.html" data-i18n="nav_menu">Menu</a>
+        <a href="reservation.html" data-i18n="nav_res">Reservation</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="menu-section">
+    <h2 data-i18n="menu_title">Our Menu</h2>
+    
+    <div class="menu-controls">
+      <div class="search-bar">
+        <input type="text" id="menu-search" placeholder="Search menu..." data-i18n-placeholder="search_placeholder">
+        <span class="search-icon">🔍</span>
+      </div>
+      
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all" data-i18n="filter_all">All</button>
+        <button class="filter-btn" data-filter="main" data-i18n="filter_main">Main Dishes</button>
+        <button class="filter-btn" data-filter="dessert" data-i18n="filter_dessert">Desserts</button>
+        <button class="filter-btn" data-filter="drinks" data-i18n="filter_drinks">Drinks</button>
+      </div>
+    </div>
+    
+    <div id="no-results" class="no-results" style="display:none;">
+      <p data-i18n="no_results">No items found</p>
+    </div>
+    
+    <div id="menu-items" class="menu-grid"></div>
+  </section>
+</main>
+
+<button id="cart-btn" class="cart-button">
+  🛒
+  <span id="cart-count" class="cart-badge">0</span>
+</button>
+
+<div id="cart-modal" class="modal hidden" aria-hidden="true">
+  <div class="modal-inner">
+    <button class="modal-close" id="close-cart">&times;</button>
+    <h3 data-i18n="cart_title">Shopping Cart</h3>
+    <div id="cart-items"></div>
+    <div id="cart-empty" class="cart-empty-msg" style="display:none;">
+      <p data-i18n="cart_empty">Your cart is empty</p>
+    </div>
+    <div id="cart-summary" style="display:none;">
+      <div class="cart-total">
+        <strong><span data-i18n="cart_total">Total:</span></strong>
+        <strong id="cart-total-price">$0</strong>
+      </div>
+      <button id="cart-checkout" class="btn" data-i18n="cart_checkout">Checkout</button>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>&copy; 2025 Nova Restaurant</p>
+</footer>
+
+<script src="js/theme.js"></script>
+<script src="js/lang.js"></script>
+<script src="js/menu_data.js"></script>
+<script src="js/storage-helper.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/menu-search.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

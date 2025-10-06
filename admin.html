@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Admin Dashboard - Nova Restaurant</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>🔐 Admin Dashboard</h1>
+    <button class="admin-logout" id="admin-logout">Logout</button>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h4>Total Orders</h4>
+      <p class="stat-number" id="total-orders">0</p>
+    </div>
+    <div class="stat-card">
+      <h4>Reservations</h4>
+      <p class="stat-number" id="total-reservations">0</p>
+    </div>
+    <div class="stat-card">
+      <h4>Menu Items</h4>
+      <p class="stat-number" id="total-menu-items">0</p>
+    </div>
+    <div class="stat-card">
+      <h4>Revenue Today</h4>
+      <p class="stat-number" id="total-revenue">$0</p>
+    </div>
+  </div>
+
+  <div class="admin-tabs">
+    <button class="tab-btn active" data-tab="overview">Overview</button>
+    <button class="tab-btn" data-tab="menu">Menu Management</button>
+    <button class="tab-btn" data-tab="reservations">Reservations</button>
+    <button class="tab-btn" data-tab="orders">Orders</button>
+    <button class="tab-btn" data-tab="logs">Activity Logs</button>
+  </div>
+
+  <div id="overview-tab" class="tab-content active">
+    <div class="admin-card">
+      <h3>📊 Dashboard Overview</h3>
+      <p>Welcome to the Nova Restaurant admin panel. Use the tabs above to manage different aspects of your restaurant.</p>
+      
+      <div style="margin-top: 30px;">
+        <h4>Recent Activity</h4>
+        <div id="recent-activity">
+          <p>✅ System ready</p>
+          <p>📝 Admin logged in successfully</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="menu-tab" class="tab-content">
+    <div class="admin-card">
+      <h3>🍽️ Menu Management</h3>
+      <div id="menu-success" class="success-message" style="display:none;">Menu item saved successfully!</div>
+      
+      <form class="menu-form" id="menu-form">
+        <input type="hidden" id="menu-item-id">
+        <input type="text" id="menu-name" placeholder="Item Name" required>
+        <textarea id="menu-description" placeholder="Description" required></textarea>
+        <input type="number" id="menu-price" placeholder="Price ($)" step="0.01" required>
+        <select id="menu-category" required>
+          <option value="">Select Category</option>
+          <option value="main">Main Dishes</option>
+          <option value="dessert">Desserts</option>
+          <option value="drinks">Drinks</option>
+          <option value="appetizers">Appetizers</option>
+        </select>
+        <div class="image-upload-container">
+          <label for="menu-image-upload" class="image-upload-label">
+            📷 Upload Dish Image
+          </label>
+          <input type="file" id="menu-image-upload" accept="image/*" class="image-upload-input">
+          <div id="image-preview" class="image-preview"></div>
+        </div>
+        <button type="submit" class="btn">Add Menu Item</button>
+      </form>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="menu-items-list">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="reservations-tab" class="tab-content">
+    <div class="admin-card">
+      <h3>📅 Reservations</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Guests</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="reservations-list">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="orders-tab" class="tab-content">
+    <div class="admin-card">
+      <h3>🛒 Orders</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="orders-list">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="logs-tab" class="tab-content">
+    <div class="admin-card">
+      <h3>📋 Activity Logs (سجل النشاطات)</h3>
+      <p>جميع الأنشطة الإدارية يتم تسجيلها تلقائياً للأمان والمراقبة</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>التاريخ والوقت</th>
+            <th>المستخدم</th>
+            <th>النشاط</th>
+            <th>IP Address</th>
+          </tr>
+        </thead>
+        <tbody id="activity-logs-list">
+          <tr><td colspan="4" style="text-align:center;">سجل النشاطات متاح فقط مع Firebase</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- App Scripts -->
+<script src="js/lang.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/menu_data.js"></script>
+<script src="js/storage-helper.js"></script>
+<script src="js/admin-dashboard-firebase.js"></script>
+</body>
+</html>
